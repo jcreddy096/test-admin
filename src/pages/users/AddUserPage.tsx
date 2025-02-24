@@ -7,7 +7,11 @@ const AddUserPage = () => {
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>Add User</Typography>
+      <Typography variant="h5" 
+      gutterBottom>
+        Add User
+        </Typography>
+        
       <UserForm userId={null} onSuccess={() => navigate("/users")} />
       <Button onClick={() => navigate("/users")} variant="outlined" sx={{ mt: 2 }}>
         Cancel

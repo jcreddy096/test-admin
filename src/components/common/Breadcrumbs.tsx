@@ -8,7 +8,7 @@ const Breadcrumbs = () => {
 
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" style={{ marginBottom: "16px" }}>
-      <Link onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+      <Link onClick={() => navigate("/users")} style={{ cursor: "pointer" }}>
         Home
       </Link>
       {pathnames.map((value, index) => {

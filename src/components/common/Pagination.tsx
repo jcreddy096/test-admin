@@ -1,5 +1,6 @@
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { Box } from "@mui/system";
 
 type PaginationProps = {
   count: number;
@@ -9,9 +10,11 @@ type PaginationProps = {
 
 const PaginationComponent = ({ count, page, onChange }: PaginationProps) => {
   return (
+    <Box display= "flex" justifyContent= "center" mt={3}>
     <Stack spacing={2}>
       <Pagination count={count} page={page} onChange={onChange} variant="outlined" color="primary" />
     </Stack>
+    </Box>
   );
 };
 
