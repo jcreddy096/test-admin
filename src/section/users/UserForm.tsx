@@ -1,10 +1,10 @@
 
-import { TextField, Button } from "@mui/material";
-import { addUser, getUserById, updateUser } from "../../api/userApi";
+import { TextField, Button, Box } from "@mui/material";
+import { addUser, getUserById, updateUser } from "../../api/uses";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import UserType from "../../types/Schema";
+import { useForm, Controller } from "react-hook-form";
+import UserType from "../../types/users/Schema";
 
 type UserFormProps = {
   userId: number | null;
@@ -13,18 +13,19 @@ type UserFormProps = {
 
 const UserForm = ({ userId, onSuccess }: UserFormProps) => {
   const {
-    register,
+    control,
     handleSubmit,
     setValue,
     reset,
-    formState: { errors },
+    
   } = useForm<UserType>();
 
   useEffect(() => {
     if (userId) {
       getUserById(userId)
         .then((res) => {
-          const { first_name, last_name, email, avatar } = res.data.data;
+          const { id, first_name, last_name, email, avatar } = res.data.data;
+          setValue("id", id);
           setValue("first_name", first_name);
           setValue("last_name", last_name);
           setValue("email", email);
@@ -51,33 +52,44 @@ const UserForm = ({ userId, onSuccess }: UserFormProps) => {
     }
   };
 
+  const fields = [
+    { name: "id", label: "ID", required: "ID is required" },
+    { name: "avatar", label: "Avatar", required: "Avatar is required" },
+    { name: "first_name", label: "First Name", required: "First name is required" },
+    { name: "last_name", label: "Last Name", required: "Last name is required" },
+    { name: "email", label: "Email", required: "Email is required" },
+  ];
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        label="First Name"
-        fullWidth
-        {...register("first_name", { required: "First name is required" })}
-        error={!!errors.first_name}
-        helperText={errors.first_name?.message}
-      />
-      <TextField
-        label="Last Name"
-        fullWidth
-        {...register("last_name", { required: "Last name is required" })}
-        error={!!errors.last_name}
-        helperText={errors.last_name?.message}
-      />
-      <TextField
-        label="Email"
-        fullWidth
-        {...register("email", { required: "Email is required" })}
-        error={!!errors.email}
-        helperText={errors.email?.message}
-      />
-      <Button type="submit" variant="contained" color="primary">
-        {userId ? "Update" : "Add"}
-      </Button>
-    </form>
+    <Box sx={{ maxWidth: 400, mx: "auto", mt: 0, p: 3, boxShadow: 3, borderRadius: 2 }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {fields.map((field) => (
+          <Box key={field.name} sx={{ mb: 2 }}>
+            <Controller
+              name={field.name as keyof UserType}
+              control={control}
+              defaultValue=""
+              rules={{ required: field.required }}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <TextField
+                  label={field.label}
+                  fullWidth
+                  value={value}
+                  onChange={onChange}
+                  error={!!error}
+                  helperText={error ? error.message : null}
+                />
+              )}
+            />
+          </Box>
+        ))}
+        <Box sx={{ textAlign: "center" }}>
+          <Button type="submit" variant="contained" color="primary">
+            {userId ? "Update" : "Submit"}
+          </Button>
+        </Box>
+      </form>
+    </Box>
   );
 };
 

@@ -1,6 +1,6 @@
 
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import ProfileMenu from "../../profile/users/ProfileMenu"; 
+import ProfileMenu from "../../pages/profile/ProfileMenu"; 
 
 const TopBar = () => {
   return (

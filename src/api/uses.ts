@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import UserType from "../types/Schema";
+import UserType from "../types/users/Schema";
 
 const BASE_URL = "https://reqres.in/api/users";
 

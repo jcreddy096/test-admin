@@ -1,8 +1,8 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom"; 
-import { getUsers } from "../../api/userApi";
-import UserType from "../../types/Schema";
+import { getUsers } from "../../api/uses";
+import UserType from "../../types/users/Schema";
 import { Box, Button } from "@mui/material";
 import UserTable from "../../components/users/UserTable";
 import PaginationComponent from "../../components/common/Pagination";
@@ -41,11 +41,13 @@ const UserListPage = () => {
   };
 
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" alignItems="center" >
       <h1>Users</h1>
-      <Button variant="contained" color="primary" onClick={() => navigate("/users/add")}>
+      <Box alignSelf="flex-end">
+      <Button variant="contained"  color="primary" onClick={() => navigate("/users/add")}>
         Add User
       </Button>
+      </Box>
       
       {loading ? (
         <Box style={{ textAlign: "center", margin: "20px 0" }}>

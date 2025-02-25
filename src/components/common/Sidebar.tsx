@@ -9,7 +9,7 @@ const Sidebar = () => {
   const menuItems = [
     { label: "Home", path: "/", icon: <Home /> },
     { label: "Users", path: "/users", icon: <People /> },
-    { label: "Products", path: "/products", icon: <Inventory /> },
+    { label: "Resource", path: "/Resource", icon: <Inventory /> },
     { label: "Brands", path: "/brands", icon: <Store /> },
     { label: "Custom", path: "/custom", icon: <Settings /> },
     { label: "Category", path: "/category", icon: <Category /> },

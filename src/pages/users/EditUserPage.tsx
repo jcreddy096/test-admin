@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import UserForm from "../../section/users/UserForm";
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 const EditUserPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -8,11 +8,9 @@ const EditUserPage = () => {
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>Edit User</Typography>
+      <Typography variant="h5" align="center" gutterBottom>Edit User</Typography>
       <UserForm userId={Number(id)} onSuccess={() => navigate("/users")} />
-      <Button onClick={() => navigate("/users")} variant="outlined" sx={{ mt: 2 }}>
-        Cancel
-      </Button>
+      
     </Container>
   );
 };

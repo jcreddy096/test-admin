@@ -13,7 +13,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useForm, Controller, useWatch } from "react-hook-form";
-import ChangePasswordPage from "./ChangePassword"; 
+import ChangePasswordPage from "./ChnagePassword"; 
 
 const ProfilePage = () => {
   const [email, setEmail] = useState<string>("");
@@ -98,9 +98,11 @@ const ProfilePage = () => {
                   <TextField label="Email" fullWidth {...field} margin="normal" disabled />
                 )}
               />
-              <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+              <Box  sx={{textAlign: "right"}} >
+              <Button type="submit"   variant="contained"  sx={{ mt: 2 }}>
                 Save
               </Button>
+              </Box>
             </Box>
           </Paper>
         </Box>

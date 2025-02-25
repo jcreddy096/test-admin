@@ -1,27 +1,29 @@
 import { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from "@mui/material";
-import { deleteUser } from "../../api/uses";
+import { deleteResource } from "../../api/resource"; 
 import { toast } from "react-toastify";
 
-type UserDeleteProps = {
-  userId: number | null;
+type ResourceDeleteProps = {
+  resourceId: number | null;
+  resource: string; 
   onClose: () => void;
   onSuccess: () => void;
 };
 
-const UserDelete = ({ userId, onClose, onSuccess }: UserDeleteProps) => {
+const ResourceDelete = ({ resourceId, resource, onClose, onSuccess }: ResourceDeleteProps) => {
+
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
-    if (!userId) return;
+    if (!resourceId ) return;
 
     try {
       setLoading(true);
-      await deleteUser(userId); 
-      toast.success("User deleted successfully!");
+      await deleteResource(resource, resourceId); 
+      toast.success("Resource deleted successfully!");
       onSuccess();
     } catch  { 
-      toast.error("Failed to delete user.");
+      toast.error("Failed to delete resource.");
     } finally {
       setLoading(false);
       onClose();
@@ -29,10 +31,10 @@ const UserDelete = ({ userId, onClose, onSuccess }: UserDeleteProps) => {
   };
 
   return (
-    <Dialog open={Boolean(userId)} onClose={onClose}>
+    <Dialog open={Boolean(resourceId)} onClose={onClose}>
       <DialogTitle>Confirm Deletion</DialogTitle>
       <DialogContent>
-        <Typography>Are you sure you want to delete this user?</Typography>
+        <Typography>Are you sure you want to delete this resource?</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} disabled={loading}>
@@ -46,4 +48,4 @@ const UserDelete = ({ userId, onClose, onSuccess }: UserDeleteProps) => {
   );
 };
 
-export default UserDelete;
+export default ResourceDelete;

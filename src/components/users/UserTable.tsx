@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableRow, Avatar, IconButton } from "@mui/material";
-import  UserType  from "../../types/Schema";
+import  UserType  from "../../types/users/Schema";
 import { Delete, Edit } from "@mui/icons-material";
 
 type UserTableProps = {
@@ -13,8 +13,8 @@ const UserTable = ({ users, onEdit, onDelete }: UserTableProps) => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Avatar</TableCell>
           <TableCell>ID</TableCell>
+          <TableCell>Avatar</TableCell>
           <TableCell>Name</TableCell>
           <TableCell>Email</TableCell>
           <TableCell>Actions</TableCell>
@@ -23,10 +23,11 @@ const UserTable = ({ users, onEdit, onDelete }: UserTableProps) => {
       <TableBody>
         {users.map((user) => (
           <TableRow key={user.id}>
+            <TableCell>{user.id}</TableCell>
             <TableCell>
               <Avatar src={user.avatar} />
             </TableCell>
-            <TableCell>{user.id}</TableCell>
+            
             <TableCell>{user.first_name} {user.last_name}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell>
