@@ -2,7 +2,9 @@
 import { TextField, Button } from "@mui/material";
 import { addUser, getUserById, updateUser } from "../../api/userApi";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import UserType from "../../types/Schema";
 
 type UserFormProps = {
   userId: number | null;
@@ -10,53 +12,69 @@ type UserFormProps = {
 };
 
 const UserForm = ({ userId, onSuccess }: UserFormProps) => {
-  const [userData, setUserData] = useState({ first_name: "", last_name: "", email: "", avatar: "" });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<UserType>();
 
   useEffect(() => {
     if (userId) {
       getUserById(userId)
         .then((res) => {
-          setUserData(res.data.data);
+          const { first_name, last_name, email, avatar } = res.data.data;
+          setValue("first_name", first_name);
+          setValue("last_name", last_name);
+          setValue("email", email);
+          setValue("avatar", avatar);
         })
-        .catch (()=> {})}
-  }, [userId]);
+        .catch(() => {});
+    } else {
+      reset();
+    }
+  }, [userId, setValue, reset]);
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data: UserType) => {
     try {
       if (userId) {
-         await updateUser(userId, userData);
-        toast.success("User updated successfully!"); 
+        await updateUser(userId, data);
+        toast.success("User updated successfully!");
       } else {
-         await addUser(userData);
-        toast.success("User added successfully!"); 
-      } 
+        await addUser(data);
+        toast.success("User added successfully!");
+      }
       onSuccess();
-    } catch  {
+    } catch {
       toast.error("Something went wrong!");
     }
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <TextField
         label="First Name"
         fullWidth
-        value={userData.first_name}
-        onChange={(e) => setUserData({ ...userData, first_name: e.target.value })}
+        {...register("first_name", { required: "First name is required" })}
+        error={!!errors.first_name}
+        helperText={errors.first_name?.message}
       />
       <TextField
         label="Last Name"
         fullWidth
-        value={userData.last_name}
-        onChange={(e) => setUserData({ ...userData, last_name: e.target.value })}
+        {...register("last_name", { required: "Last name is required" })}
+        error={!!errors.last_name}
+        helperText={errors.last_name?.message}
       />
       <TextField
         label="Email"
         fullWidth
-        value={userData.email}
-        onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+        {...register("email", { required: "Email is required" })}
+        error={!!errors.email}
+        helperText={errors.email?.message}
       />
-      <Button onClick={handleSubmit} variant="contained" color="primary">
+      <Button type="submit" variant="contained" color="primary">
         {userId ? "Update" : "Add"}
       </Button>
     </form>

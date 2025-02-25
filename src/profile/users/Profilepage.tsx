@@ -21,17 +21,16 @@ const ProfilePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("email") || "user@example.com";
-    setEmail(storedEmail);
-    setName(storedEmail.split("@")[0]);
-  }, []);
+  
 
   const getAvatarLetter = (name: string) => {
     const words = name.trim().split(" ");
     if (words.length > 1) {
       return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
     }
+
+  
+
     return name.charAt(0).toUpperCase();
   };
 
@@ -44,14 +43,23 @@ const ProfilePage = () => {
 
   const watchedName = useWatch({ control, name: "name" });
 
+  const onSubmit = () => {
+    setOpenSnackbar(true); 
+  };
+
   useEffect(() => {
     setValue("name", name);
     setValue("email", email);
   }, [name, email, setValue]);
 
-  const onSubmit = () => {
-    setOpenSnackbar(true); 
-  };
+ 
+      
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("email") || "user@example.com";
+    setEmail(storedEmail);
+    setName(storedEmail.split("@")[0]);
+  }, []);
+
 
   return (
     <Container maxWidth="md">
