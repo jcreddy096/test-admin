@@ -1,0 +1,171 @@
+
+$primary-color: #472985;
+$secondary-color: #f8f8f8;
+$btn-primary: #2ee6a9;
+$btn-secondary: #5c3cb4;
+$text-color: #fff;
+$font-main: 'Poppins', sans-serif;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-main;
+}
+
+body {
+  background: $secondary-color;
+  color: $text-color;
+}
+
+.header {
+  background: $secondary-color;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .logo img {
+    width: 150px;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+
+      li {
+        margin: 0 15px;
+
+        a {
+          text-decoration: none;
+          color: $primary-color;
+          font-size: 16px;
+          font-weight: 600;
+          transition: color 0.3s ease-in-out;
+
+          &:hover {
+            color: darken($primary-color, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+
+    .btn {
+      background: $btn-secondary;
+      color: $text-color;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      margin-right: 15px;
+      transition: background 0.3s;
+
+      &:hover {
+        background: lighten($btn-secondary, 10%);
+      }
+    }
+
+    .login {
+      color: $primary-color;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}
+
+.hero {
+  background: linear-gradient(135deg, #2d0e50 30%, #472985 90%);
+  padding: 150px 50px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .hero-content {
+    max-width: 600px;
+
+    h1 {
+      font-size: 42px;
+      font-weight: bold;
+      color: $text-color;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: lighten($text-color, 20%);
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+
+      .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &.primary {
+          background: $btn-primary;
+          color: #000;
+
+          &:hover {
+            background: darken($btn-primary, 10%);
+          }
+        }
+
+        &.secondary {
+          background: $btn-secondary;
+          color: $text-color;
+
+          &:hover {
+            background: lighten($btn-secondary, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  .hero-image {
+    position: relative;
+    width: 500px;
+    max-width: 40%;
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
