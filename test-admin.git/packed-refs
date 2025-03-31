@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled sorted 
+01cb862f6420345efa110f80f86c257fc40f1640 refs/heads/MPCI-UI-design
+30fbdc2793f1d9a8646d1680097ca4fbc88044e6 refs/heads/Swagger
+a399f36f118085b7023bd55236cdb38b7ffb003b refs/heads/UI-design
+a399f36f118085b7023bd55236cdb38b7ffb003b refs/heads/admin
+a399f36f118085b7023bd55236cdb38b7ffb003b refs/heads/ecommerce-test
